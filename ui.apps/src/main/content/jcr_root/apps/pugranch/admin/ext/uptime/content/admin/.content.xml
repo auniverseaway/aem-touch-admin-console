@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:mixinTypes="[sling:VanityPath]"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Uptime"
+    sling:resourceType="granite/ui/components/shell/collectionpage"
+    consoleId="cq-tools-operations-uptime"
+    contentPath="/content"
+    currentView="${state[&quot;shell.collectionpage.layoutId&quot;].string}"
+    modeGroup="granite-uptime-collection"
+    pageURITemplate="/apps/pugranch/admin/ext/uptime/content/admin.html"
+    targetCollection=".granite-uptime-collection">
+    <head jcr:primaryType="nt:unstructured">
+        <clientlibs
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
+            categories="[coralui3,granite.ui.coral.foundation,pugranch.uptime]"/>
+        <viewport
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/admin/page/viewport"/>
+        <meta
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/meta"
+            content="chrome=1"
+            name="X-UA-Compatible"/>
+    </head>
+    <views jcr:primaryType="nt:unstructured">
+        <list
+            granite:rel="granite-uptime-collection"
+            jcr:primaryType="nt:unstructured"
+            jcr:title="List View"
+            sling:resourceType="granite/ui/components/coral/foundation/table"
+            draggable="{Boolean}false"
+            icon="viewList"
+            layoutId="list"
+            limit="{Long}40"
+            modeGroup="granite-uptime-collection"
+            path="/content"
+            selectionCount="single"
+            selectionMode="row"
+            size="40"
+            sortMode="local"
+            src="/libs/granite/backup/content/admin/views/list.html"
+            stateId="shell.collectionpage">
+            <!-- sling:resourceType="granite/backup/components/datasource/backupdatasource" -->
+            <datasource
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="/apps/pugranch/admin/ext/uptime/components/datasource/uptimedatasource"
+                itemResourceType="/apps/pugranch/admin/ext/uptime/components/uptimeentry"
+                value="value"
+                text="text"
+                month="month"
+                year="year"
+                path="/etc/pugranch/public/uptimeCalendar"/>
+            <columns jcr:primaryType="nt:unstructured">
+                <select
+                    jcr:primaryType="nt:unstructured"
+                    select="{Boolean}true"/>
+                <year
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="YEAR"
+                    sortable="{Boolean}true"
+                    sortType="alphanumeric"/>
+                <month
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="MONTH"
+                    sortable="{Boolean}true"
+                    sortType="numeric"/>
+                <percent
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="PERCENT"
+                    sortable="{Boolean}true"
+                    sortType="numeric"/>
+            </columns>
+        </list>
+    </views>
+    <actions jcr:primaryType="nt:unstructured">
+        <selection jcr:primaryType="nt:unstructured">
+            <delete
+                granite:id="toggleDeleteEntryDialog"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                icon="delete"
+                text="Delete"
+                variant="actionBar"
+                x-cq-linkchecker="skip"/>
+            <download
+                granite:id="editEntryDialog"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                icon="edit"
+                text="Edit"
+                variant="actionBar"
+                x-cq-linkchecker="skip"/>
+        </selection>
+        <secondary jcr:primaryType="nt:unstructured">
+            <create
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/anchorbutton"
+                href="/apps/pugranch/admin/ext/uptime/content/createEntry.html"
+                text="Create"
+                variant="primary"
+                x-cq-linkchecker="skip"/>
+        </secondary>
+    </actions>
+    <title
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/text"
+        text="Uptime Calendar"/>
+</jcr:root>

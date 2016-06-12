@@ -1,0 +1,33 @@
+<input name="_charset_" type="hidden" value="utf-8" data-sly-use.uptime="org.millr.pugranch.core.models.UptimeEntryModel" />
+<input name=":redirect" type="hidden" value="/apps/pugranch/admin/ext/uptime/content/admin.html" />
+<div class="coral-Form-fieldwrapper">
+    <label class="coral-Form-fieldlabel">Month</label>
+    <coral-select name="month" id="monthInput" class="coral-Form-field" required>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'January'}">January</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'February'}">February</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'March'}">March</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'April'}">April</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'May'}">May</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'June'}">June</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'July'}">July</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'August'}">August</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'September'}">September</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'October'}">October</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'November'}">November</coral-select-item>
+        <coral-select-item data-sly-attribute.selected="${uptime.month == 'December'}">December</coral-select-item>
+    </coral-select>
+</div>
+<div class="coral-Form-fieldwrapper">
+    <label class="coral-Form-fieldlabel">Year</label>
+    <coral-numberinput class="coral-Form-field" min="2016" name="year" value="${uptime.year || '2016'}"></coral-numberinput>
+</div>
+<!-- <coral-alert>
+    <coral-alert-header>INFO</coral-alert-header>
+    <coral-alert-content>
+        Lorem Ipsum Dolar
+    </coral-alert-content>
+</coral-alert> -->
+<div class="coral-Form-fieldwrapper">
+    <label class="coral-Form-fieldlabel">Uptime Percent</label>
+    <coral-numberinput class="coral-Form-field" min="0" max="100" name="percent" value="${uptime.percent || '100.00'}" step=".01"></coral-numberinput>
+</div>
