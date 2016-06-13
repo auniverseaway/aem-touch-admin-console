@@ -45,7 +45,7 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
-                            <backupform
+                            <uptimeform
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="pugranch/admin/ext/uptime/components/uptimeform"/>
                         </items>
