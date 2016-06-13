@@ -7,6 +7,7 @@
     <filter root="/apps/sling" />
     <filter root="/etc/designs/pugranch"/>
     <filter root="/etc/pugranch">
+        <exclude pattern="/etc/pugranch/public/uptimeCalendar" />
     </filter>
 
 </workspaceFilter>

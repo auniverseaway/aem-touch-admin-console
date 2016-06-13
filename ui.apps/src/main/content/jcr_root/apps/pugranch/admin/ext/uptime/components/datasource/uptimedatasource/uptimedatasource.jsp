@@ -26,8 +26,6 @@ ValueMap dsProperties = ResourceUtil.getValueMap(datasource);
 String genericListPath = dsProperties.get("path", String.class);
 
 // What fields and values do we want from the children resources? This should be inside the component dialog.
-String month = dsProperties.get("month", String.class);
-String year = dsProperties.get("year", String.class);
 String itemResourceType = dsProperties.get("itemResourceType", String.class);
 
 // If the path isn't null,  get the resource and loop through the children.
@@ -35,29 +33,32 @@ if (genericListPath != null) {
   
   Resource parentResource = resourceResolver.getResource(genericListPath);
 
-  // Create a list to stuff our values
-  List<Resource> fakeResourceList = new ArrayList<Resource>();
+  if (parentResource != null) {
 
-  // Grab the children and get their properties.
-  for(Resource child : parentResource.getChildren()){
+    // Create a list to stuff our values
+    List<Resource> fakeResourceList = new ArrayList<Resource>();
 
-    ValueMap vm = new ValueMapDecorator(new HashMap<String, Object>());
+    // Grab the children and get their properties.
+    for(Resource child : parentResource.getChildren()){
 
-    ValueMap childProperties = ResourceUtil.getValueMap(child);
+      ValueMap vm = new ValueMapDecorator(new HashMap<String, Object>());
 
-    vm.put("month", childProperties.get(month, String.class));
-    vm.put("year", childProperties.get(year, Long.class));
-    vm.put("percent", childProperties.get("percent", Double.class));
-    vm.put("path", child.getPath());
-    vm.put("name", child.getName());
+      ValueMap childProperties = ResourceUtil.getValueMap(child);
 
-    fakeResourceList.add(new ValueMapResource(resolver, "", itemResourceType, vm));
+      vm.put("month", childProperties.get("month", String.class));
+      vm.put("year", childProperties.get("year", Long.class));
+      vm.put("percent", childProperties.get("percent", Double.class));
+      vm.put("path", child.getPath());
+      vm.put("name", child.getName());
+
+      fakeResourceList.add(new ValueMapResource(resolver, "", itemResourceType, vm));
+    }
+
+    // Create a new data source from iterating through our fakedResourceList
+    DataSource ds = new SimpleDataSource(fakeResourceList.iterator());
+    
+    // Add the datasource to our request to later expose in the view
+    request.setAttribute(DataSource.class.getName(), ds);
   }
-
-  // Create a new data source from iterating through our fakedResourceList
-  DataSource ds = new SimpleDataSource(fakeResourceList.iterator());
-  
-  // Add the datasource to our request to later expose in the view
-  request.setAttribute(DataSource.class.getName(), ds);
 }
 %>
