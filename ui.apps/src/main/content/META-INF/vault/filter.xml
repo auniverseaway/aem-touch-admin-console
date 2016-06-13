@@ -6,4 +6,7 @@
     <filter root="/apps/cq" />
     <filter root="/apps/sling" />
     <filter root="/etc/designs/pugranch"/>
+    <filter root="/etc/pugranch">
+    </filter>
+
 </workspaceFilter>
